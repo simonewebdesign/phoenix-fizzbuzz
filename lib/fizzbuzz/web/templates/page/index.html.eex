@@ -34,3 +34,9 @@
     </ul>
   </div>
 </div>
+
+<div>
+  <%= for item <- @fizzbuzz_sequence do %>
+    <p><%= item %></p>
+  <% end %>
+</div>
