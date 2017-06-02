@@ -1,9 +1,6 @@
-(function (global, factory) {
-typeof exports === 'object' ? factory(exports) :
-typeof define === 'function' && define.amd ? define(['exports'], factory) :
-factory(global.Phoenix = global.Phoenix || {});
-}(this, (function (exports) {
 "use strict";
+
+var exports = {};
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1316,5 +1313,3 @@ var Timer = function () {
 
   return Timer;
 }();
-
-})));

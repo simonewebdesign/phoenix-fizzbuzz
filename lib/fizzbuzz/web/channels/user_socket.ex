@@ -2,7 +2,7 @@ defmodule FizzBuzz.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", FizzBuzz.Web.RoomChannel
+  channel "item:*", FizzBuzz.Web.ItemChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
