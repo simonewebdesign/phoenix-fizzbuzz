@@ -4,7 +4,9 @@ defmodule FizzBuzz.FizzContext do
 
   def list_items do
     FizzBuzz.perform(100)
-    |> Enum.map(&Item.to_struct/1)
+    |> Stream.with_index()
+    |> Stream.map(fn {value, index} -> Item.to_struct(index, value) end)
+    |> Enum.to_list()
   end
 
   def change_item(%FizzBuzz.FizzContext.Item{} = item) do
