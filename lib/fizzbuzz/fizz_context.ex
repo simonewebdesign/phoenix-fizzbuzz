@@ -1,6 +1,10 @@
 defmodule FizzBuzz.FizzContext do
 
+  alias FizzBuzz.FizzContext.Item
+
   def list_items do
+    FizzBuzz.perform(100)
+    |> Enum.map(&Item.to_struct/1)
   end
 
   def change_item(%FizzBuzz.FizzContext.Item{} = item) do
