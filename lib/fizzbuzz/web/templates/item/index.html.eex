@@ -1,6 +1,6 @@
 <h2>Listing Items</h2>
 
-<table class="table">
+<table class="table table-items table-hover">
   <thead>
     <tr>
       <th>Value</th>
