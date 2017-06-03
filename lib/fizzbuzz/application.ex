@@ -5,6 +5,7 @@ defmodule FizzBuzz.Application do
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
+    :ets.new :db, [:named_table, :public, read_concurrency: true]
 
     # Define workers and child supervisors to be supervised
     children = [
