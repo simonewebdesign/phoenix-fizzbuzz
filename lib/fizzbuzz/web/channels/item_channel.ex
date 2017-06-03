@@ -1,5 +1,6 @@
 defmodule FizzBuzz.Web.ItemChannel do
   use FizzBuzz.Web, :channel
+  alias FizzBuzz.FizzContext.Item
 
   def join("item:*", _payload, socket) do
     {:ok, socket}
@@ -11,8 +12,19 @@ defmodule FizzBuzz.Web.ItemChannel do
     {:reply, {:ok, payload}, socket}
   end
 
-  def handle_in("toggle_favorite", %{"id" => id} = payload, socket) do
-    {:reply, {:ok, payload}, socket}
+  def handle_in("toggle_favorite", %{"id" => id}, socket) do
+    toggled =
+      case :ets.lookup(:db, id) do
+        [{_, item}] ->
+          %Item{item | favorited: !item.favorited}
+        [] ->
+          value = FizzBuzz.fizzbuzz(id+1)
+          %Item{id: id, value: value, favorited: true}
+      end
+
+    :ets.insert(:db, {id, toggled})
+
+    {:reply, {:ok, toggled}, socket}
   end
 
   # It is also common to receive messages from the client and
