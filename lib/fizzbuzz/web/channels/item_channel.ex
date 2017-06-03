@@ -1,13 +1,17 @@
 defmodule FizzBuzz.Web.ItemChannel do
   use FizzBuzz.Web, :channel
 
-  def join("item:*", payload, socket) do
+  def join("item:*", _payload, socket) do
     {:ok, socket}
   end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("ping", payload, socket) do
+    {:reply, {:ok, payload}, socket}
+  end
+
+  def handle_in("toggle_favorite", %{"id" => id} = payload, socket) do
     {:reply, {:ok, payload}, socket}
   end
 

@@ -11,3 +11,14 @@ var channel = socket.channel("item:*", {})
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+let itemsTable = document.querySelector('.table-items')
+
+itemsTable.addEventListener('click', event => {
+  let id = parseInt(event.target.getAttribute('data-id'))
+  if (isNaN(id)) return
+
+  channel
+    .push('toggle_favorite', {id: id})
+    .receive('ok', reply => console.log("got reply", reply))
+})
