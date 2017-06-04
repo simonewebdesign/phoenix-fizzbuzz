@@ -1,5 +1,6 @@
 <h2>Listing Items</h2>
 
+<%= pagination_links @page %>
 <table class="table table-items table-hover">
   <thead>
     <tr>
@@ -8,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for item <- @fizzbuzz_sequence do %>
+<%= for item <- @page do %>
     <tr>
       <td><%= item.value %></td>
       <td class="favorite" data-id="<%= item.id %>"><%= item.favorited %></td>
@@ -16,3 +17,4 @@
 <% end %>
   </tbody>
 </table>
+<%= pagination_links @page %>
