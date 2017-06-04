@@ -17,7 +17,11 @@ defmodule FizzBuzz.Web.PageController do
       total_entries: @total_entries,
       total_pages: @total_pages
     }
-    render conn, "index.html", page: scrivener_page
+
+    case content_type(params) do
+      :json -> json conn, sequence
+      :html -> render conn, "index.html", page: scrivener_page
+    end
   end
 
   defp page_number(%{"page" => p}) do
@@ -34,4 +38,7 @@ defmodule FizzBuzz.Web.PageController do
       [] -> FizzBuzz.FizzContext.Item.to_struct(id, FizzBuzz.fizzbuzz(id+1))
     end
   end
+
+  defp content_type(%{"json" => _}), do: :json
+  defp content_type(_params), do: :html
 end
