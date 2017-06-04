@@ -20,5 +20,22 @@ itemsTable.addEventListener('click', event => {
 
   channel
     .push('toggle_favorite', {id: id})
-    .receive('ok', reply => console.log("got reply", reply))
+    .receive('ok', item => {
+      newRow = createRow(item)
+      event.target.parentNode.replaceWith(newRow)
+    })
 })
+
+function createRow({id, value, favorited}) {
+  tdValue = document.createElement('td')
+  tdValue.textContent = value
+
+  tdFavorited = document.createElement('td')
+  tdFavorited.textContent = favorited
+  tdFavorited.setAttribute('data-id', id)
+
+  tr = document.createElement('tr')
+  tr.appendChild(tdValue)
+  tr.appendChild(tdFavorited)
+  return tr
+}
