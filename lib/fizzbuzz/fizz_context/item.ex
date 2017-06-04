@@ -3,7 +3,6 @@ defmodule FizzBuzz.FizzContext.Item do
   The model for a FizzBuzz item.
   """
 
-  @derive Phoenix.Param
   defstruct id: 0, value: "default", favorited: false
 
   @doc """
