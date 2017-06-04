@@ -1,8 +1,7 @@
-defmodule FizzBuzz.FizzContext.Item do
+defmodule FizzBuzz.Item do
   @moduledoc """
-  The model for a FizzBuzz item.
+  The model.
   """
-
   defstruct id: 0, value: "default", favorited: false
 
   @doc """
@@ -12,8 +11,8 @@ defmodule FizzBuzz.FizzContext.Item do
   Items are not favorited by default.
 
   ## Examples
-  iex> FizzBuzz.FizzContext.Item.to_struct(123, "Fizz")
-  %FizzBuzz.FizzContext.Item{
+  iex> FizzBuzz.Item.to_struct(123, "Fizz")
+  %FizzBuzz.Item{
     id: 123,
     value: "Fizz",
     favorited: false

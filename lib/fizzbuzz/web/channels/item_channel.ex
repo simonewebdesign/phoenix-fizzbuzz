@@ -1,6 +1,5 @@
 defmodule FizzBuzz.Web.ItemChannel do
   use FizzBuzz.Web, :channel
-  alias FizzBuzz.FizzContext.Item
 
   def join("item:*", _payload, socket) do
     {:ok, socket}
@@ -16,10 +15,10 @@ defmodule FizzBuzz.Web.ItemChannel do
     toggled =
       case :ets.lookup(:db, id) do
         [{_, item}] ->
-          %Item{item | favorited: !item.favorited}
+          %FizzBuzz.Item{item | favorited: !item.favorited}
         [] ->
           value = FizzBuzz.fizzbuzz(id+1)
-          %Item{id: id, value: value, favorited: true}
+          %FizzBuzz.Item{id: id, value: value, favorited: true}
       end
 
     :ets.insert(:db, {id, toggled})
