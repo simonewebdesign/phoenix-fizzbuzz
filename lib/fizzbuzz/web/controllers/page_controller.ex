@@ -6,7 +6,7 @@ defmodule FizzBuzz.Web.PageController do
   @total_pages div(@total_entries, @page_size)
 
   def index(conn, params) do
-    page = page_number(params)
+    page = from_params(params, "page", 1)
     offset = (page - 1) * @page_size
     limit = @page_size + offset - 1
     sequence = Enum.map(offset..limit, &fetch_or_generate_fizzbuzz_item/1)
@@ -24,13 +24,19 @@ defmodule FizzBuzz.Web.PageController do
     end
   end
 
-  defp page_number(%{"page" => p}) do
-    case Integer.parse p do
-      {int, _rem} -> if int > 0, do: int, else: 1
-      :error -> 1
+
+  defp from_params(params, name, default) do
+    %{^name => value} = params
+
+    case Integer.parse value do
+      {int, _rem} -> if int > 0, do: int, else: default
+      :error -> default
     end
+
+  rescue
+    MatchError -> default
   end
-  defp page_number(_params), do: 1
+
 
   defp fetch_or_generate_fizzbuzz_item(id) do
     case :ets.lookup(:db, id) do
@@ -38,6 +44,7 @@ defmodule FizzBuzz.Web.PageController do
       [] -> FizzBuzz.Item.to_struct(id, FizzBuzz.fizzbuzz(id+1))
     end
   end
+
 
   defp content_type(%{"json" => _}), do: :json
   defp content_type(_params), do: :html
