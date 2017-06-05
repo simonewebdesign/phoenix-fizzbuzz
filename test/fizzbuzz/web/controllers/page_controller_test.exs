@@ -17,4 +17,12 @@ defmodule FizzBuzz.Web.PageControllerTest do
     assert hd(json_response(conn, 200)) ==
       %{"id" => 1100, "value" => "Fizz", "favorited" => false}
   end
+
+  test "GET /?json&page=3&page_size=20", %{conn: conn} do
+    conn = get conn, "/?json&page=3&page_size=20"
+    response = json_response(conn, 200)
+    assert hd(response) ==
+      %{"id" => 40, "value" => "41", "favorited" => false}
+    assert length(response) == 20
+  end
 end

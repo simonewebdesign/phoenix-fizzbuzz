@@ -7,17 +7,17 @@ defmodule FizzBuzz.Web.PageController do
 
   def index(conn, params) do
     page = from_params(params, "page", 1)
-    offset = (page - 1) * @page_size
-    limit = @page_size + offset - 1
+    page_size = from_params(params, "page_size", @page_size)
+    offset = (page - 1) * page_size
+    limit = page_size + offset - 1
     sequence = Enum.map(offset..limit, &fetch_or_generate_fizzbuzz_item/1)
     scrivener_page = %Scrivener.Page{
       entries: sequence,
       page_number: page,
-      page_size: @page_size,
+      page_size: page_size,
       total_entries: @total_entries,
       total_pages: @total_pages
     }
-
     case content_type(params) do
       :json -> json conn, sequence
       :html -> render conn, "index.html", page: scrivener_page
