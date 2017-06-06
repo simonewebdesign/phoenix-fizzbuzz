@@ -41,7 +41,7 @@ defmodule FizzBuzz.Web.PageController do
   defp fetch_or_generate_fizzbuzz_item(id) do
     case :ets.lookup(:db, id) do
       [{_, item}] -> item
-      [] -> FizzBuzz.Item.to_struct(id, FizzBuzz.fizzbuzz(id+1))
+      [] -> struct(FizzBuzz.Item, id: id, value: FizzBuzz.fizzbuzz(id+1))
     end
   end
 
