@@ -8,6 +8,7 @@ defmodule FizzBuzz.Mixfile do
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
      deps: deps()]
   end
 
@@ -26,6 +27,7 @@ defmodule FizzBuzz.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
+     {:excoveralls, "~> 0.6", only: :test},
      {:scrivener_html, "~> 1.7"}]
   end
 end
