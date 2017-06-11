@@ -1,4 +1,4 @@
-# FizzBuzz
+# FizzBuzz [![Build Status](https://travis-ci.org/simonewebdesign/phoenix-fizzbuzz.svg?branch=master)](https://travis-ci.org/simonewebdesign/phoenix-fizzbuzz) [![Coverage Status](https://coveralls.io/repos/github/simonewebdesign/phoenix-fizzbuzz/badge.svg?branch=master)](https://coveralls.io/github/simonewebdesign/phoenix-fizzbuzz?branch=master)
 
 A Phoenix application.
 
