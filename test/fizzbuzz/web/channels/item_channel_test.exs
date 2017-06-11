@@ -15,4 +15,9 @@ defmodule FizzBuzz.Web.ItemChannelTest do
     ref = push socket, "ping", %{"hello" => "there"}
     assert_reply ref, :ok, %{"hello" => "there"}
   end
+
+  test "marking items as favorites", %{socket: socket} do
+    ref = push socket, "toggle_favorite", %{"id" => 123}
+    assert_reply ref, :ok, %FizzBuzz.Item{favorited: true, id: 123, value: "124"}
+  end
 end
