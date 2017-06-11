@@ -1,0 +1,7 @@
+{
+  "skip_files": [
+    "lib/fizzbuzz/web/web.ex",
+    "lib/fizzbuzz/web/endpoint.ex",
+    "lib/fizzbuzz/web/views/error_helpers.ex"
+  ]
+}
